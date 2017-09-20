@@ -10,7 +10,7 @@ require "redmineResolvedReminder/constants"
 #
 # Process command line options
 #
-args = {}
+args = {test_mode: false}
 begin
   OptionParser.new do |o|
     o.banner = "Usage: #{File.basename($0)} [options]"

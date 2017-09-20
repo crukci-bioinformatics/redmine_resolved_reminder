@@ -19,3 +19,9 @@ The command to run the reminder program is:
 where the `-t` or `--test` option runs in test mode, sending no emails but
 writing to standard out what would be sent, and `-v` or `--version` reports
 the version of the gem.
+
+### NOTA BENE
+
+This gem accesses the Redmine database, obviously.  The path to the Redmine
+application is hard-coded in .../lib/redmineResolvedReminder/constants.rb, so
+if (when) Redmine is upgraded, this path will need to change accordingly.
