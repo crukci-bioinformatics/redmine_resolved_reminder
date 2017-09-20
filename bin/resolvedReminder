@@ -1,0 +1,32 @@
+#!/usr/bin/env ruby
+
+require "optparse"
+
+require "redmineResolvedReminder"
+require "redmineResolvedReminder/constants"
+
+################################################################################
+#
+# Process command line options
+#
+args = {}
+begin
+  OptionParser.new do |o|
+    o.banner = "Usage: #{File.basename($0)} [options]"
+    o.on("-t","--test","test mode: do not send emails") {|t| args[:test_mode] = true}
+    o.on("-v","--version","show version of the gem") do
+      puts "version #{RedmineResolvedReminder::VERSION}"
+      exit
+    end
+    o.on_tail("-h","--help","Prints this help") do
+      puts o
+      exit
+    end
+  end.parse!
+rescue OptionParser::ParseError => pe
+  STDERR.puts pe.message
+  exit
+end
+
+reminder = RedmineResolvedReminder.new(args)
+reminder.run()
