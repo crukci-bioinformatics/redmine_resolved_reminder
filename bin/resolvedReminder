@@ -1,5 +1,6 @@
 #!/usr/bin/env ruby
 
+require "bundler/setup"
 require "optparse"
 
 require "redmineResolvedReminder"
@@ -28,5 +29,5 @@ rescue OptionParser::ParseError => pe
   exit
 end
 
-reminder = RedmineResolvedReminder.new(args)
+reminder = RedmineResolvedReminder::RedmineResolvedReminder.new(args)
 reminder.run()

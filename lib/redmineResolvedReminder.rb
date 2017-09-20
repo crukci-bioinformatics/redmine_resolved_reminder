@@ -1,4 +1,4 @@
-require "redmineResolvedReminder/defaults"
+require "redmineResolvedReminder/constants"
 
 module RedmineResolvedReminder
   class RedmineResolvedReminder
