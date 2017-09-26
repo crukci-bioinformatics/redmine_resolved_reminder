@@ -1,0 +1,23 @@
+
+==== Resolved Summary: <%= @date %> for <%= @email %> ====
+
+This is an automated email informing you that <%= %>
+there <%= @issList.length == 1 ? "is " + @issList.length.to_s + " issue" : "are " + @issList.length.to_s + " issues" %>
+ in Redmine that <%= @issList.length == 1 ? "is" : "are" %> assigned to or <%= %>
+originated by you, currently in the "Resolved" state, that should be checked <%= %>
+and closed (or redirected if the resolution is not satisfactory).
+
+<% @issList.each do |issue| %>
+  <%= issue.id %>: <%= issue.subject %><%= "\r\n" %>
+  <%= ISSUE_URL+issue.id.to_s %><%= "\r\n" %>
+
+<% end %>
+
+<% if RECEIVE_ORPHANS.include? @userLoginSet[@email] %>
+Orphans:
+<% @orphanIssueSet.each do |issue| %>
+  <%= issue.id %>: <%= issue.subject %><%= "\r\n" %>
+  <%= ISSUE_URL+issue.id.to_s %><%= "\r\n" %>
+
+<% end %>
+<% end %>

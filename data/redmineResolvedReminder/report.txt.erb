@@ -1,0 +1,14 @@
+
+==== Resolved Summary: <%= @date %> ====
+
+<% @userIssueSet.each do |email, issList| %>
+Receiver: <%= email %><%= "\n" %>
+<% issList.each do |issue| %>
+    <%= issue.id %>: <%= issue.subject %><%= "\n" %>
+  <% end %>
+
+<% end %>
+Orphans:
+<% @orphanIssueSet.each do |issue| %>
+    <%= issue.id %>: <%= issue.subject %><%= "\n" %>
+<% end %>
