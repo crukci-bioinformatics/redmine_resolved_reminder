@@ -23,24 +23,23 @@ Gem::Specification.new do |spec|
 
   spec.files         = `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|spec|features)/}) }
   spec.bindir        = "bin"
-  spec.executables   = ["resolved_reminder"]
+  spec.executables   = ["resolvedReminder"]
   spec.require_paths = ["lib"]
 
-  spec.add_development_dependency "actionpack-xml_parser"
-  spec.add_development_dependency "bundler", "~> 1.10"
-  spec.add_development_dependency "rake", "~> 10.0"
-  spec.add_development_dependency "minitest", "~> 5.0"
-  spec.add_development_dependency "net-ssh", "~> 3.2"
-  spec.add_development_dependency "mail", "~> 2.6"
-  spec.add_development_dependency "railties", "4.2.8"
-  spec.add_development_dependency "activesupport", "4.2.8"
-  spec.add_development_dependency "activerecord", "4.2.8"
-  spec.add_development_dependency "rails", "4.2.8"
-  spec.add_development_dependency "protected_attributes"
-  spec.add_development_dependency "coderay"
-  spec.add_development_dependency "mimemagic"
-  spec.add_runtime_dependency "mysql2"
-  spec.add_runtime_dependency "ruby-openid"
-  spec.add_runtime_dependency "rack-openid"
+  spec.add_runtime_dependency "actionpack-xml_parser", "~> 1.0"
+  spec.add_runtime_dependency "rake", "~> 10.0"
+  spec.add_runtime_dependency "minitest", "~> 5.0"
+  spec.add_runtime_dependency "net-ssh", "~> 3.2"
+  spec.add_runtime_dependency "mail", "~> 2.6"
+  spec.add_runtime_dependency "railties", "4.2.8"
+  spec.add_runtime_dependency "activesupport", "4.2.8"
+  spec.add_runtime_dependency "activerecord", "4.2.8"
+  spec.add_runtime_dependency "rails", "4.2.8"
+  spec.add_runtime_dependency "protected_attributes", "~> 1.1"
+  spec.add_runtime_dependency "coderay", "~> 1.1"
+  spec.add_runtime_dependency "mimemagic", "~> 0.3"
+  spec.add_runtime_dependency "mysql2", "~> 0.4"
+  spec.add_runtime_dependency "ruby-openid", "~> 2.7"
+  spec.add_runtime_dependency "rack-openid", "~> 1.4"
   
 end
