@@ -2,16 +2,18 @@ require "logger"
 require "mail"
 require "socket"
 
-require "redmineResolvedReminder/constants"
+#require "redmineResolvedReminder/constants"
+require File.expand_path(File.dirname(__FILE__)+'/../redmineResolvedReminder/constants')
 
-$: << RedmineResolvedReminder::REDMINE_HOME + "/config"
-$: << RedmineResolvedReminder::REDMINE_HOME + "/app/models"
+#$: << RedmineResolvedReminder::REDMINE_HOME + "/config"
+#$: << RedmineResolvedReminder::REDMINE_HOME + "/app/models"
 
-require "boot"
-require RedmineResolvedReminder::APP_PATH
+#require "boot"
+#require RedmineResolvedReminder::APP_PATH
 
 module RedmineResolvedReminder
-  class RedmineResolvedReminder
+  class ResolvedReminder
+    include Constants
 
     def initialize(args)
       @testMode = args[:test_mode]
@@ -57,10 +59,7 @@ module RedmineResolvedReminder
     end
 
     def loadTemplate(fn)
-      template_path = Gem.datadir(PACKAGE)
-      if not File.exist?(template_path)
-        template_path = File.expand_path("../data/redmineResolvedReminder",File.dirname(__FILE__))
-      end
+      template_path = File.expand_path("../../extra/redmineResolvedReminder",File.dirname(__FILE__))
 
       path = File.join(template_path,fn)
       fd = File.open(path)

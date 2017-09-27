@@ -16,6 +16,10 @@ The command to run the reminder program is:
 
   > resolved_reminder [-t|--test] [-v|--version]
 
+Alternative version, as Rake task:
+
+  > cd .../redmine-N.n.x && ./bin/rake redmine:resolved_reminder:run 
+
 where the `-t` or `--test` option runs in test mode, sending no emails but
 writing to standard out what would be sent, and `-v` or `--version` reports
 the version of the gem.
