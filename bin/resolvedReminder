@@ -3,7 +3,6 @@
 require "bundler/setup"
 require "optparse"
 
-require "redmineResolvedReminder"
 require "redmineResolvedReminder/constants"
 
 ################################################################################

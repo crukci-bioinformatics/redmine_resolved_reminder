@@ -1,6 +1,6 @@
 module RedmineResolvedReminder
   module Constants
-    VERSION = "1.0.0"
+    VERSION = "1.0.1"
     PACKAGE = "redmineResolvedReminder"
 #  REDMINE_HOME = "/opt/redmine/bioinformatics/redmine-3.4.2"
 #  APP_PATH = REDMINE_HOME + "/config/application"

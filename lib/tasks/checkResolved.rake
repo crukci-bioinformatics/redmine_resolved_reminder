@@ -17,11 +17,7 @@ namespace :redmine do
           o.banner = "Usage: #{File.basename($0)} [options]"
           o.on("-t","--test","test mode: do not send emails") {|t| args[:test_mode] = true}
           o.on("-v","--version","show version of the gem") do
-            puts "version #{VERSION}"
-            exit
-          end
-          o.on_tail("-h","--help","Prints this help") do
-            puts o
+            puts "version #{RedmineResolvedReminder::Constants::VERSION}"
             exit
           end
         end.parse!
