@@ -103,7 +103,7 @@ module RedmineResolvedReminder
     end
 
     def mailReport(text,recip,count)
-      opts = {address: "10.20.221.14",
+      opts = {address: "10.20.221.99",
               port: 25,
               domain: "cruk.cam.ac.uk",
               authentication: "plain",
