@@ -103,9 +103,12 @@ module RedmineResolvedReminder
     end
 
     def mailReport(text,recip,count)
-      opts = {address: "10.20.221.99",
-              port: 25,
-              domain: "cruk.cam.ac.uk",
+      mailhost = Redmine::Configuration['email_delivery']['smtp_settings'][:address]
+      mailport = Redmine::Configuration['email_delivery']['smtp_settings'][:port]
+      maildomain = Redmine::Configuration['email_delivery']['smtp_settings'][:domain]
+      opts = {address: mailhost,
+              port: mailport,
+              domain: maildomain,
               authentication: "plain",
               tls: false,
               enable_starttls_auto: false}
