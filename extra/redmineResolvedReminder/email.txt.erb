@@ -2,13 +2,22 @@
 ==== Resolved Summary: <%= @date %> for <%= @email %> ====
 
 This is an automated email informing you that <%= %>
-there <%= @issList.length == 1 ? "is " + @issList.length.to_s + " issue" : "are " + @issList.length.to_s + " issues" %>
+there <%= @issList.length == 1 ? "is 1 issue" : "are " + @issList.length.to_s + " issues" %>
  in Redmine that <%= @issList.length == 1 ? "is" : "are" %> assigned to or <%= %>
-originated by you, currently in the "Resolved" state, that should be checked <%= %>
-and closed (or redirected if the resolution is not satisfactory).
+originated by you
+that <%= @issList.length == 1 ? "is" : "are" %> either in the "Resolved" state or <%= %>
+<%= @issList.length == 1 ? "is" : "are" %> in the "Active" state but that <%= %>
+<%= @issList.length == 1 ? "has" : "have" %> not had any changes for sixty days or more.
+These should be checked and closed (or redirected if the resolution is not satisfactory).
 
 <% @issList.each do |issue| %>
   <%= issue.id %>: <%= issue.subject %><%= "\r\n" %>
+<% case issue.status.name %>
+<% when "Active" %>
+  <%= issue.status.name %>, last update <%= issue.updated_on&.to_date %><%= "\r\n" %>
+<% else %>
+  <%= issue.status.name %><%= "\r\n" %>
+<% end %>
   <%= ISSUE_URL+issue.id.to_s %><%= "\r\n" %>
 
 <% end %>
@@ -17,6 +26,12 @@ and closed (or redirected if the resolution is not satisfactory).
 Orphans:
 <% @orphanIssueSet.each do |issue| %>
   <%= issue.id %>: <%= issue.subject %><%= "\r\n" %>
+<% case issue.status.name %>
+<% when "Active" %>
+  <%= issue.status.name %>, last update <%= issue.updated_on&.to_date %><%= "\r\n" %>
+<% else %>
+  <%= issue.status.name %><%= "\r\n" %>
+<% end %>
   <%= ISSUE_URL+issue.id.to_s %><%= "\r\n" %>
 
 <% end %>

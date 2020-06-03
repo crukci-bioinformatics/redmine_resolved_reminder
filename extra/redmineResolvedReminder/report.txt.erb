@@ -1,14 +1,40 @@
 
-==== Resolved Summary: <%= @date %> ====
+==== Resolved/Inactive Summary: <%= @date %> ====
 
 <% @userIssueSet.each do |email, issList| %>
 Receiver: <%= email %><%= "\n" %>
 <% issList.each do |issue| %>
     <%= issue.id %>: <%= issue.subject %><%= "\n" %>
+<% case issue.status.name %>
+<% when "Active" %>
+        <%= issue.status.name %>, last update <%= issue.updated_on&.to_date %><%= "\n" %>
+<% else %>
+        <%= issue.status.name %><%= "\n" %>
+<% end %>
+<% if @watcherIssueSet[issue.id]&.any? %>
+        Watchers:<%= %>
+<% @watcherIssueSet[issue.id].each do |watcher| %>
+  <%= watcher.firstname %> <%= watcher.lastname %><%= %>
+<% end %>
+<%= "\n" %>
+<% end %>
 <% end %>
 
 <% end %>
 Orphans:
 <% @orphanIssueSet.each do |issue| %>
     <%= issue.id %>: <%= issue.subject %><%= "\n" %>
+<% case issue.status.name %>
+<% when "Active" %>
+        <%= issue.status.name %>, last update <%= issue.updated_on&.to_date %><%= "\n" %>
+<% else %>
+        <%= issue.status.name %><%= "\n" %>
+<% end %>
+<% if @watcherIssueSet[issue.id]&.any? %>
+        Watchers:<%= %>
+<% @watcherIssueSet[issue.id].each do |watcher| %>
+  <%= watcher.firstname %> <%= watcher.lastname %><%= %>
+<% end %>
+<%= "\n" %>
+<% end %>
 <% end %>
