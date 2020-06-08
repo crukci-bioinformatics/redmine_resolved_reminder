@@ -106,28 +106,14 @@ module RedmineResolvedReminder
         subject = "Resolved/inactive issues: #{@issList.length}"
         mailReport(subject, body, @email)
       end
-      # this next clause covers the case where Rory or Matt has no assigned
-      # issues, but they should still receive the orphans if any.
-      if !@orphanIssueSet.empty?
-        RECEIVE_ORPHANS.each do |username|
-          if ! @userLoginSet.has_value?(username)
-            @email = User.find_by(login: username).email_address.address
-            @userLoginSet[@email] = username
-            @issList = []
-            renderer = ERB.new(template,nil,">")
-            body = renderer.result(binding)
-            subject = "Resolved/inactive issues: #{@issList.length}"
-            mailReport(subject, body, @email)
-          end
-        end
-      end
+
       # This clause sends the summary report to the Redmine admins.
       if !(@userIssueSet.empty? && @orphanIssueSet.empty?)
         template = loadTemplate("report.txt.erb")
         renderer = ERB.new(template,nil,">")
         body = renderer.result(binding)
         subject = "Resolved/inactive issue summary for #{@date}"
-        RECEIVE_ORPHANS.each do |username|
+        RECEIVE_OVERVIEW.each do |username|
           @email = User.find_by(login: username).email_address.address
           mailReport(subject, body, @email)
         end
