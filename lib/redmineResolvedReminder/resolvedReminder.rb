@@ -67,12 +67,16 @@ module RedmineResolvedReminder
       end
       
       # Similar thing for issues that are in the active state but the last
-      # update was more than 60 days ago.
-      lowerbound = Date.new(2000, 1, 1)
+      # update was more than 60 days ago. This needs to be 60 days since either
+      # the update stamp or the most recent time log.
       cutoff = Date.today - 60
       status = IssueStatus.find_by(name: "Active")
-      Issue.where(status: status, updated_on: lowerbound..cutoff).each do |issue|
-        processIssue(issue)
+      # Doing this by query, with joins and grouping, is a pain. Filter in code.
+      Issue.where(status: status).each do |issue|
+        if issue.updated_on <= cutoff and (issue.time_entries.empty? or issue.time_entries.max_by(&:spent_on).spent_on <= cutoff)
+          @log.debug "Inactive issue: #{issue.id} #{issue.updated_on&.to_date} #{issue.time_entries.max_by(&:spent_on)&.spent_on}"
+          processIssue(issue)
+        end
       end
       
     end
